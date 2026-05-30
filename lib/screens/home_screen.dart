@@ -13,8 +13,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           // Background Image bernuansa Islami
           Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&q=80&w=1000',
+            child: Image.asset(
+              'assets/images/bg.jpg',
               fit: BoxFit.cover,
             ),
           ),
@@ -24,9 +24,9 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.teal[900]!.withOpacity(0.9),
-                    Colors.teal[800]!.withOpacity(0.6),
-                    Colors.black87,
+                    Colors.teal[900]!.withOpacity(0.7),
+                    Colors.teal[800]!.withOpacity(0.4),
+                    Colors.black.withOpacity(0.6),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
