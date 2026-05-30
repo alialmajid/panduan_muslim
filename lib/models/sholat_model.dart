@@ -20,6 +20,7 @@ class JenisSholatModel {
   final String niatArab;
   final String niatLatin;
   final String niatArti;
+  final bool isWajib;
 
   JenisSholatModel({
     required this.id,
@@ -27,5 +28,6 @@ class JenisSholatModel {
     required this.niatArab,
     required this.niatLatin,
     required this.niatArti,
+    required this.isWajib,
   });
 }

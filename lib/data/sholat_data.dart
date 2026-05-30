@@ -9,6 +9,7 @@ class SholatData {
         niatArab: 'أُصَلِّى فَرْضَ الصُّبْحِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli fardhosh shubhi rak\'ataini mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat fardhu Subuh dua rakaat menghadap kiblat karena Allah Ta\'ala.',
+        isWajib: true,
       ),
       JenisSholatModel(
         id: '2',
@@ -16,6 +17,7 @@ class SholatData {
         niatArab: 'أُصَلِّى فَرْضَ الظُّهْرِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli fardhodh dhuhri arba\'a raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat fardhu Dzuhur empat rakaat menghadap kiblat karena Allah Ta\'ala.',
+        isWajib: true,
       ),
       JenisSholatModel(
         id: '3',
@@ -23,6 +25,7 @@ class SholatData {
         niatArab: 'أُصَلِّى فَرْضَ الْعَصْرِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli fardhol \'ashri arba\'a raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat fardhu Ashar empat rakaat menghadap kiblat karena Allah Ta\'ala.',
+        isWajib: true,
       ),
       JenisSholatModel(
         id: '4',
@@ -30,6 +33,7 @@ class SholatData {
         niatArab: 'أُصَلِّى فَرْضَ الْمَغْرِبِ ثَلَاثَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli fardhol maghribi tsalaatsa raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat fardhu Maghrib tiga rakaat menghadap kiblat karena Allah Ta\'ala.',
+        isWajib: true,
       ),
       JenisSholatModel(
         id: '5',
@@ -37,6 +41,7 @@ class SholatData {
         niatArab: 'أُصَلِّى فَرْضَ الْعِشَاءِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli fardhol \'isyaa-i arba\'a raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat fardhu Isya empat rakaat menghadap kiblat karena Allah Ta\'ala.',
+        isWajib: true,
       ),
 
       JenisSholatModel(
@@ -45,6 +50,7 @@ class SholatData {
         niatArab: 'أُصَلِّى سُنَّةَ الضُّحَى رَكْعَتَيْنِ لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli sunnatadh dhuhaa rak\'ataini lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat sunnah Dhuha dua rakaat karena Allah Ta\'ala.',
+        isWajib: false,
       ),
       JenisSholatModel(
         id: '8',
@@ -52,6 +58,7 @@ class SholatData {
         niatArab: 'أُصَلِّى سُنَّةَ التَّهَجُّدِ رَكْعَتَيْنِ لِلّٰهِ تَعَالَى',
         niatLatin: 'Ushalli sunnatat tahajjudi rak\'ataini lillaahi ta\'aalaa.',
         niatArti: 'Aku berniat sholat sunnah Tahajjud dua rakaat karena Allah Ta\'ala.',
+        isWajib: false,
       ),
     ];
   }
@@ -75,9 +82,9 @@ class SholatData {
       SholatModel(
         id: '3',
         name: 'Doa Iftitah',
-        arabic: 'اللّٰهُ أَكْبَرُ كَبِيْرًا وَالْحَمْدُ لِلّٰهِ كَثِيْرًا وَسُبْحَانَ اللّٰهِ بُكْرَةً وَأَصِيْلًا',
-        latin: 'Allahu akbar kabiiraa wal hamdu lillaahi katsiiraa, wa subhaanallaahi bukratan wa aṣiilaa.',
-        translation: 'Allah Maha Besar dengan sebesar-besarnya, segala puji bagi Allah dengan pujian yang banyak, dan Maha Suci Allah pada waktu pagi dan petang.',
+        arabic: 'اللّٰهُ أَكْبَرُ كَبِيْرًا وَالْحَمْدُ لِلّٰهِ كَثِيْرًا وَسُبْحَانَ اللّٰهِ بُكْرَةً وَأَصِيْلًا. إِنِّى وَجَّهْتُ وَجْهِيَ لِلَّذِيْ فَطَرَ السَّمٰوَاتِ وَالْأَرْضَ حَنِيْفًا مُسْلِمًا وَمَا أَنَا مِنَ الْمُشْرِكِيْنَ. إِنَّ صَلَاتِيْ وَنُسُكِيْ وَمَحْيَايَ وَمَمَاتِيْ لِلّٰهِ رَبِّ الْعَالَمِيْنَ. لَا شَرِيْكَ لَهُ وَبِذٰلِكَ أُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِيْنَ',
+        latin: 'Allaahu akbar kabiiraa wal hamdu lillaahi katsiiraa, wa subhaanallaahi bukratan wa asiilaa. Innii wajjahtu wajhiya lilladzii fatharas samaawaati wal ardha haniifan musliman wa maa anaa minal musyrikiin. Inna shalaatii wa nusukii wa mahyaaya wa mamaatii lillaahi rabbil \'aalamiin. Laa syariika lahu wa bidzaalika umirtu wa anaa minal muslimiin.',
+        translation: 'Allah Maha Besar dengan sebesar-besarnya, segala puji bagi Allah dengan pujian yang banyak, dan Maha Suci Allah pada waktu pagi dan petang. Sesungguhnya aku menghadapkan wajahku kepada Dzat yang telah menciptakan langit dan bumi dengan lurus dan berserah diri, dan aku bukanlah dari golongan orang-orang musyrik. Sesungguhnya sholatku, ibadahku, hidupku, dan matiku hanyalah untuk Allah, Tuhan semesta alam. Tiada sekutu bagi-Nya, dan demikianlah aku diperintahkan, dan aku adalah bagian dari orang-orang muslim.',
       ),
       SholatModel(
         id: '4',
@@ -131,23 +138,30 @@ class SholatData {
       SholatModel(
         id: '11',
         name: 'Tasyahud Awal',
-        arabic: 'اَلتَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ. اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ...',
-        latin: 'Attahiyyaatul mubaarokaatush shalawaatuth thayyibaatu lillaah. Assalaamu\'alaika ayyuhan nabiyyu wa rahmatullaahi wa barakaatuh...',
-        translation: 'Segala penghormatan, keberkahan, salawat, dan kebaikan hanya milik Allah. Semoga keselamatan, rahmat, dan berkah Allah tercurah kepadamu wahai Nabi...',
+        arabic: 'اَلتَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ. اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ. اَلسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللّٰهِ الصَّالِحِيْنَ. أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللّٰهِ. اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ',
+        latin: 'Attahiyyaatul mubaarokaatush shalawaatuth thayyibaatu lillaah. Assalaamu\'alaika ayyuhan nabiyyu wa rahmatullaahi wa barakaatuh. Assalaamu\'alainaa wa \'alaa \'ibaadillaahish shoolihiin. Asyhadu allaa ilaaha illallaah wa asyhadu anna muhammadan rasuulullaah. Allahumma shalli \'alaa sayyidinaa muhammad.',
+        translation: 'Segala penghormatan, keberkahan, salawat, dan kebaikan hanya milik Allah. Semoga keselamatan, rahmat, dan berkah Allah tercurah kepadamu wahai Nabi. Semoga keselamatan tercurah kepada kami dan kepada hamba-hamba Allah yang saleh. Aku bersaksi bahwa tiada tuhan selain Allah dan aku bersaksi bahwa Muhammad adalah utusan Allah. Ya Allah, limpahkanlah rahmat kepada Nabi Muhammad.',
       ),
       SholatModel(
         id: '12',
         name: 'Tasyahud Akhir & Sholawat',
-        arabic: 'اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ، وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى سَيِّدِنَا إِبْرَاهِيْمَ...',
-        latin: 'Allahumma shalli \'alaa sayyidinaa muhammad, wa \'alaa aali sayyidinaa muhammad, kamaa shallaita \'alaa sayyidinaa ibraahiim...',
-        translation: 'Ya Allah, limpahkanlah rahmat kepada Nabi Muhammad dan kepada keluarga Nabi Muhammad, sebagaimana Engkau telah melimpahkan rahmat kepada Nabi Ibrahim...',
+        arabic: 'اَلتَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ. اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ. اَلسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللّٰهِ الصَّالِحِيْنَ. أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللّٰهِ. اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ، وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى سَيِّدِنَا إِبْرَاهِيْمَ وَعَلَى آلِ سَيِّدِنَا إِبْرَاهِيْمَ، وَبَارِكْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى سَيِّدِنَا إِبْرَاهِيْمَ وَعَلَى آلِ سَيِّدِنَا إِبْرَاهِيْمَ، فِي الْعَالَمِيْنَ إِنَّكَ حَمِيْدٌ مَجِيْدٌ',
+        latin: 'Attahiyyaatul mubaarokaatush shalawaatuth thayyibaatu lillaah. Assalaamu\'alaika ayyuhan nabiyyu wa rahmatullaahi wa barakaatuh. Assalaamu\'alainaa wa \'alaa \'ibaadillaahish shoolihiin. Asyhadu allaa ilaaha illallaah wa asyhadu anna muhammadan rasuulullaah. Allahumma shalli \'alaa sayyidinaa muhammad, wa \'alaa aali sayyidinaa muhammad, kamaa shallaita \'alaa sayyidinaa ibraahiim wa \'alaa aali sayyidinaa ibraahiim. Wa baarik \'alaa sayyidinaa muhammad wa \'alaa aali sayyidinaa muhammad, kamaa baarakta \'alaa sayyidinaa ibraahiim wa \'alaa aali sayyidinaa ibraahiim, fil \'aalamiina innaka hamiidum majiid.',
+        translation: 'Segala penghormatan, keberkahan, salawat, dan kebaikan hanya milik Allah. Semoga keselamatan, rahmat, dan berkah Allah tercurah kepadamu wahai Nabi. Semoga keselamatan tercurah kepada kami dan hamba-hamba Allah yang saleh. Aku bersaksi tiada tuhan selain Allah dan Muhammad utusan Allah. Ya Allah, limpahkanlah rahmat kepada Nabi Muhammad dan keluarganya, sebagaimana Engkau telah melimpahkan rahmat kepada Nabi Ibrahim dan keluarganya. Dan berkahilah Nabi Muhammad dan keluarganya, sebagaimana Engkau telah memberkahi Nabi Ibrahim dan keluarganya, di seluruh alam semesta. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.',
       ),
       SholatModel(
         id: '13',
-        name: 'Salam',
-        arabic: 'اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ',
-        latin: 'Assalaamu\'alaikum wa rahmatullaah.',
-        translation: 'Semoga keselamatan dan rahmat Allah dilimpahkan kepadamu.',
+        name: 'Salam (Ke Kanan)',
+        arabic: 'اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ، أَسْأَلُكَ الْفَوْزَ بِالْجَنَّةِ',
+        latin: 'Assalaamu\'alaikum wa rahmatullaah, as\'alukal fauza bil jannah.',
+        translation: 'Semoga keselamatan dan rahmat Allah dilimpahkan kepadamu. Aku memohon kepada-Mu kemenangan berupa surga.',
+      ),
+      SholatModel(
+        id: '14',
+        name: 'Salam (Ke Kiri)',
+        arabic: 'اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ، أَسْأَلُكَ النَّجَاةَ مِنَ النَّارِ وَالْعَفْوَ عِنْدَ الْحِسَابِ',
+        latin: 'Assalaamu\'alaikum wa rahmatullaah, as\'alukan najaata minan naari wal \'afwa \'indal hisaab.',
+        translation: 'Semoga keselamatan dan rahmat Allah dilimpahkan kepadamu. Aku memohon kepada-Mu keselamatan dari api neraka dan ampunan pada saat hisab.',
       ),
     ];
   }

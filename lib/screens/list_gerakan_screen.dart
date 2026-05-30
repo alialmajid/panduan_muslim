@@ -17,10 +17,10 @@ class ListGerakanScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Bacaan ${jenisSholat.nama}',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 16),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.teal[900]),
         ),
-        backgroundColor: Colors.teal[700],
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.teal[900],
         elevation: 0,
         centerTitle: true,
       ),
@@ -34,15 +34,14 @@ class ListGerakanScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.teal.withOpacity(0.08),
-                  blurRadius: 15,
-                  offset: const Offset(0, 5),
+                  color: Colors.black.withOpacity(0.04),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
                 ),
               ],
-              border: Border.all(color: Colors.teal.withOpacity(0.1)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,7 +50,7 @@ class ListGerakanScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.teal[50],
+                    color: Colors.teal.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(

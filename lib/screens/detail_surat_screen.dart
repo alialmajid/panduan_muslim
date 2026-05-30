@@ -82,16 +82,16 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
           children: [
             Text(
               widget.suratModel.namaLatin,
-              style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 18),
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.teal[900]),
             ),
             Text(
               '${widget.suratModel.arti} • ${widget.suratModel.jumlahAyat} Ayat',
-              style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.teal[50]),
+              style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.grey[600]),
             ),
           ],
         ),
-        backgroundColor: Colors.teal[700],
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.teal[900],
         elevation: 0,
         centerTitle: false,
         actions: [
@@ -214,7 +214,7 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                       gradient: LinearGradient(
                         colors: [Colors.teal[700]!, Colors.teal[500]!],
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.teal.withOpacity(0.3),
@@ -244,11 +244,11 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        blurRadius: 8,
+                        color: Colors.black.withOpacity(0.04),
+                        blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
                     ],
@@ -263,8 +263,8 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                             decoration: BoxDecoration(
-                              color: Colors.teal[50],
-                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.teal.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               'Ayat ${ayat.nomorAyat}',

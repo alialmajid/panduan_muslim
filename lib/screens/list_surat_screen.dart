@@ -28,10 +28,10 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
       appBar: AppBar(
         title: Text(
           'Al-Quran Digital',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.teal[900]),
         ),
-        backgroundColor: Colors.teal[700],
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.teal[900],
         elevation: 0,
         centerTitle: true,
       ),
@@ -77,8 +77,8 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.teal.withOpacity(0.05),
-                        blurRadius: 8,
+                        color: Colors.black.withOpacity(0.04),
+                        blurRadius: 10,
                         offset: const Offset(0, 4),
                       )
                     ],
@@ -100,29 +100,23 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
                         child: Row(
                           children: [
                             // Nomor Surat dengan hiasan
-                            Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Transform.rotate(
-                                  angle: 0.785398, // 45 degrees
-                                  child: Container(
-                                    width: 38,
-                                    height: 38,
-                                    decoration: BoxDecoration(
-                                      color: Colors.teal[50],
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                ),
-                                Text(
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.teal.withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Text(
                                   surat.nomor.toString(),
                                   style: GoogleFonts.poppins(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.teal[800],
+                                    color: Colors.teal[700],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                             const SizedBox(width: 20),
                             // Info Surat
@@ -134,7 +128,7 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
                                     surat.namaLatin,
                                     style: GoogleFonts.poppins(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey[800],
                                     ),
                                   ),
