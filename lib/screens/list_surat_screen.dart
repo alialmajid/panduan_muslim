@@ -42,9 +42,25 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
             return const Center(child: CircularProgressIndicator(color: Colors.teal));
           } else if (snapshot.hasError) {
             return Center(
-              child: Text(
-                'Gagal memuat data: ${snapshot.error}',
-                style: GoogleFonts.poppins(color: Colors.red),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.wifi_off_rounded, size: 64, color: Colors.redAccent),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Koneksi Terputus',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: Text(
+                      'Pastikan internet Anda aktif untuk memuat ayat Al-Quran.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                  ),
+                ],
               ),
             );
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
