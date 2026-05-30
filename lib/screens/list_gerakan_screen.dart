@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../data/sholat_data.dart';
 import '../models/sholat_model.dart';
-import 'list_gerakan_screen.dart';
+import 'detail_gerakan_screen.dart';
 
-class TataCaraScreen extends StatelessWidget {
-  const TataCaraScreen({Key? key}) : super(key: key);
+class ListGerakanScreen extends StatelessWidget {
+  final JenisSholatModel jenisSholat;
+
+  const ListGerakanScreen({Key? key, required this.jenisSholat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<JenisSholatModel> kumpulanSholat = SholatData.getJenisSholat();
+    final List<SholatModel> tataCaraList = SholatData.getTataCara(jenisSholat);
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text(
-          'Pilihan Sholat',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          jenisSholat.nama,
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 18),
         ),
         backgroundColor: Colors.teal[700],
         foregroundColor: Colors.white,
@@ -25,9 +27,9 @@ class TataCaraScreen extends StatelessWidget {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        itemCount: kumpulanSholat.length,
+        itemCount: tataCaraList.length,
         itemBuilder: (context, index) {
-          final item = kumpulanSholat[index];
+          final item = tataCaraList[index];
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
@@ -50,44 +52,40 @@ class TataCaraScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ListGerakanScreen(jenisSholat: item),
+                      builder: (context) => DetailGerakanScreen(sholatModel: item),
                     ),
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(12),
+                        width: 48,
+                        height: 48,
                         decoration: BoxDecoration(
                           color: Colors.teal[50],
-                          borderRadius: BorderRadius.circular(16),
+                          shape: BoxShape.circle,
                         ),
-                        child: Icon(Icons.mosque_rounded, color: Colors.teal[800], size: 28),
+                        alignment: Alignment.center,
+                        child: Text(
+                          item.id,
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal[800],
+                          ),
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.nama,
-                              style: GoogleFonts.poppins(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[800],
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Tata cara & niat lengkap',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          item.name,
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey[800],
+                          ),
                         ),
                       ),
                       Icon(Icons.arrow_forward_ios_rounded, size: 18, color: Colors.teal[300]),

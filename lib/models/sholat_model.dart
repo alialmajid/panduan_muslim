@@ -13,3 +13,19 @@ class SholatModel {
     required this.translation,
   });
 }
+
+class JenisSholatModel {
+  final String id;
+  final String nama;
+  final String niatArab;
+  final String niatLatin;
+  final String niatArti;
+
+  JenisSholatModel({
+    required this.id,
+    required this.nama,
+    required this.niatArab,
+    required this.niatLatin,
+    required this.niatArti,
+  });
+}

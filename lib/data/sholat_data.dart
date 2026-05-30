@@ -1,14 +1,69 @@
 import '../models/sholat_model.dart';
 
 class SholatData {
-  static List<SholatModel> getTataCara() {
+  static List<JenisSholatModel> getJenisSholat() {
+    return [
+      JenisSholatModel(
+        id: '1',
+        nama: 'Sholat Subuh',
+        niatArab: 'أُصَلِّى فَرْضَ الصُّبْحِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli fardhosh shubhi rak\'ataini mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat fardhu Subuh dua rakaat menghadap kiblat karena Allah Ta\'ala.',
+      ),
+      JenisSholatModel(
+        id: '2',
+        nama: 'Sholat Dzuhur',
+        niatArab: 'أُصَلِّى فَرْضَ الظُّهْرِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli fardhodh dhuhri arba\'a raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat fardhu Dzuhur empat rakaat menghadap kiblat karena Allah Ta\'ala.',
+      ),
+      JenisSholatModel(
+        id: '3',
+        nama: 'Sholat Ashar',
+        niatArab: 'أُصَلِّى فَرْضَ الْعَصْرِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli fardhol \'ashri arba\'a raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat fardhu Ashar empat rakaat menghadap kiblat karena Allah Ta\'ala.',
+      ),
+      JenisSholatModel(
+        id: '4',
+        nama: 'Sholat Maghrib',
+        niatArab: 'أُصَلِّى فَرْضَ الْمَغْرِبِ ثَلَاثَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli fardhol maghribi tsalaatsa raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat fardhu Maghrib tiga rakaat menghadap kiblat karena Allah Ta\'ala.',
+      ),
+      JenisSholatModel(
+        id: '5',
+        nama: 'Sholat Isya',
+        niatArab: 'أُصَلِّى فَرْضَ الْعِشَاءِ أَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli fardhol \'isyaa-i arba\'a raka\'aatin mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat fardhu Isya empat rakaat menghadap kiblat karena Allah Ta\'ala.',
+      ),
+
+      JenisSholatModel(
+        id: '7',
+        nama: 'Sholat Sunnah Dhuha',
+        niatArab: 'أُصَلِّى سُنَّةَ الضُّحَى رَكْعَتَيْنِ لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli sunnatadh dhuhaa rak\'ataini lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat sunnah Dhuha dua rakaat karena Allah Ta\'ala.',
+      ),
+      JenisSholatModel(
+        id: '8',
+        nama: 'Sholat Sunnah Tahajjud',
+        niatArab: 'أُصَلِّى سُنَّةَ التَّهَجُّدِ رَكْعَتَيْنِ لِلّٰهِ تَعَالَى',
+        niatLatin: 'Ushalli sunnatat tahajjudi rak\'ataini lillaahi ta\'aalaa.',
+        niatArti: 'Aku berniat sholat sunnah Tahajjud dua rakaat karena Allah Ta\'ala.',
+      ),
+    ];
+  }
+
+  static List<SholatModel> getTataCara(JenisSholatModel jenisSholat) {
     return [
       SholatModel(
         id: '1',
-        name: 'Niat Sholat',
-        arabic: 'أُصَلِّيْ فَرْضَ ... مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً لِلّٰهِ تَعَالَى',
-        latin: 'Ushalli fardhol ... mustaqbilal qiblati adaa-an lillaahi ta\'aalaa.',
-        translation: 'Aku berniat sholat fardhu ... menghadap kiblat karena Allah Ta\'ala.',
+        name: 'Niat ${jenisSholat.nama}',
+        arabic: jenisSholat.niatArab,
+        latin: jenisSholat.niatLatin,
+        translation: jenisSholat.niatArti,
       ),
       SholatModel(
         id: '2',
