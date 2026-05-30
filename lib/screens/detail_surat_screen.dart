@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:audioplayers/audioplayers.dart';
 import '../models/surat_model.dart';
 import '../models/ayat_model.dart';
 import '../services/api_service.dart';
@@ -16,11 +17,49 @@ class DetailSuratScreen extends StatefulWidget {
 class _DetailSuratScreenState extends State<DetailSuratScreen> {
   final ApiService apiService = ApiService();
   late Future<List<AyatModel>> futureAyat;
+  
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  String? _currentlyPlayingUrl;
+  bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
     futureAyat = apiService.getDetailSurat(widget.suratModel.nomor);
+    
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      if (mounted) {
+        setState(() {
+          _isPlaying = state == PlayerState.playing;
+        });
+      }
+    });
+    
+    _audioPlayer.onPlayerComplete.listen((event) {
+      if (mounted) {
+        setState(() {
+          _isPlaying = false;
+          _currentlyPlayingUrl = null;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _playAudio(String url) async {
+    if (_currentlyPlayingUrl == url && _isPlaying) {
+      await _audioPlayer.pause();
+    } else {
+      await _audioPlayer.play(UrlSource(url));
+      setState(() {
+        _currentlyPlayingUrl = url;
+      });
+    }
   }
 
   @override
@@ -45,6 +84,19 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
+        actions: [
+          if (widget.suratModel.audioUrl.isNotEmpty)
+            IconButton(
+              icon: Icon(
+                _currentlyPlayingUrl == widget.suratModel.audioUrl && _isPlaying 
+                    ? Icons.pause_circle_filled 
+                    : Icons.play_circle_filled,
+                size: 32,
+              ),
+              onPressed: () => _playAudio(widget.suratModel.audioUrl),
+            ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: FutureBuilder<List<AyatModel>>(
         future: futureAyat,
@@ -153,7 +205,17 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                               ),
                             ),
                           ),
-                          Icon(Icons.more_horiz_rounded, color: Colors.grey[400]),
+                          if (ayat.audioUrl.isNotEmpty)
+                            IconButton(
+                              icon: Icon(
+                                _currentlyPlayingUrl == ayat.audioUrl && _isPlaying 
+                                    ? Icons.pause_circle_filled 
+                                    : Icons.play_circle_outline,
+                                color: Colors.teal[600],
+                                size: 28,
+                              ),
+                              onPressed: () => _playAudio(ayat.audioUrl),
+                            ),
                         ],
                       ),
                       const SizedBox(height: 20),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:ui';
 import 'tata_cara_screen.dart';
 import 'list_surat_screen.dart';
 
@@ -41,35 +42,25 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Assalamu\'alaikum,',
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.teal[100],
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Hamba Allah',
-                            style: GoogleFonts.poppins(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        'Assalamu\'alaikum,',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: Colors.teal[100],
+                        ),
                       ),
-                      CircleAvatar(
-                        radius: 26,
-                        backgroundColor: Colors.white.withOpacity(0.2),
-                        child: const Icon(Icons.person, color: Colors.white, size: 30),
-                      )
+                      const SizedBox(height: 4),
+                      Text(
+                        'Hamba Allah',
+                        style: GoogleFonts.poppins(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 35),
@@ -183,47 +174,47 @@ class HomeScreen extends StatelessWidget {
     required Color iconColor,
     required VoidCallback onTap,
   }) {
-    return InkWell(
-      onTap: onTap,
+    return ClipRRect(
       borderRadius: BorderRadius.circular(24),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.95),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: InkWell(
+          onTap: onTap,
           borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.15),
-              blurRadius: 15,
-              offset: const Offset(0, 8),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5),
             ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                color: color,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                size: 38,
-                color: iconColor,
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: color,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 38,
+                    color: iconColor,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: Colors.teal[900],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
