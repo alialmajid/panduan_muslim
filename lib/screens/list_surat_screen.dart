@@ -14,11 +14,20 @@ class ListSuratScreen extends StatefulWidget {
 class _ListSuratScreenState extends State<ListSuratScreen> {
   final ApiService apiService = ApiService();
   late Future<List<SuratModel>> futureSurat;
+  
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     futureSurat = apiService.getAllSurat();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,37 +44,80 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: FutureBuilder<List<SuratModel>>(
-        future: futureSurat,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(color: Colors.teal));
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.wifi_off_rounded, size: 64, color: Colors.redAccent),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Koneksi Terputus',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[800]),
-                  ),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                    child: Text(
-                      'Pastikan internet Anda aktif untuk memuat ayat Al-Quran.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ),
-                ],
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Cari nama surat atau arti...',
+                hintStyle: GoogleFonts.poppins(color: Colors.grey[400]),
+                prefixIcon: Icon(Icons.search, color: Colors.teal[700]),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.grey[200]!, width: 1.5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.teal[600]!, width: 1.5),
+                ),
               ),
-            );
-          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            final List<SuratModel> suratList = snapshot.data!;
-            return ListView.builder(
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value.toLowerCase();
+                });
+              },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder<List<SuratModel>>(
+              future: futureSurat,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator(color: Colors.teal));
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.wifi_off_rounded, size: 64, color: Colors.redAccent),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Koneksi Terputus',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                        ),
+                        const SizedBox(height: 8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                          child: Text(
+                            'Pastikan internet Anda aktif untuk memuat ayat Al-Quran.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey[600]),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  final List<SuratModel> suratList = snapshot.data!.where((surat) {
+                    return surat.namaLatin.toLowerCase().contains(_searchQuery) ||
+                           surat.arti.toLowerCase().contains(_searchQuery);
+                  }).toList();
+
+                  if (suratList.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'Surat tidak ditemukan.',
+                        style: GoogleFonts.poppins(color: Colors.grey[600]),
+                      ),
+                    );
+                  }
+
+                  return ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               itemCount: suratList.length,
               itemBuilder: (context, index) {
@@ -74,19 +126,13 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
                   margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      )
-                    ],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey[200]!, width: 1.5),
                   ),
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -160,11 +206,14 @@ class _ListSuratScreenState extends State<ListSuratScreen> {
                 );
               },
             );
-          } else {
-            return const Center(child: Text('Tidak ada data surat.'));
-          }
-        },
-      ),
-    );
+                  } else {
+                    return const Center(child: Text('Tidak ada data surat.'));
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
-}

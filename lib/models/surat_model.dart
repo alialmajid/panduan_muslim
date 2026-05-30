@@ -28,4 +28,16 @@ class SuratModel {
       audioFull: json['audioFull'] != null ? Map<String, String>.from(json['audioFull']) : {},
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nomor': nomor,
+      'nama': nama,
+      'namaLatin': namaLatin,
+      'jumlahAyat': jumlahAyat,
+      'tempatTurun': tempatTurun,
+      'arti': arti,
+      'audioFull': audioFull,
+    };
+  }
 }

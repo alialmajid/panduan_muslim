@@ -4,6 +4,8 @@ import 'package:audioplayers/audioplayers.dart';
 import '../models/surat_model.dart';
 import '../models/ayat_model.dart';
 import '../services/api_service.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailSuratScreen extends StatefulWidget {
   final SuratModel suratModel;
@@ -36,6 +38,7 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
   void initState() {
     super.initState();
     futureAyat = apiService.getDetailSurat(widget.suratModel.nomor);
+    _saveLastRead();
     
     _audioPlayer.onPlayerStateChanged.listen((state) {
       if (mounted) {
@@ -59,6 +62,16 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
   void dispose() {
     _audioPlayer.dispose();
     super.dispose();
+  }
+
+  Future<void> _saveLastRead() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final String suratJson = jsonEncode(widget.suratModel.toJson());
+      await prefs.setString('last_read_surat', suratJson);
+    } catch (e) {
+      debugPrint('Error saving last read: $e');
+    }
   }
 
   Future<void> _playAudio(String url) async {
@@ -211,17 +224,8 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                     margin: const EdgeInsets.only(bottom: 24),
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.teal[700]!, Colors.teal[500]!],
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.teal.withOpacity(0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
+                      color: Colors.teal[800],
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
                       child: Text(
@@ -244,14 +248,8 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey[200]!, width: 1.5),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
