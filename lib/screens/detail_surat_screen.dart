@@ -21,6 +21,16 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   String? _currentlyPlayingUrl;
   bool _isPlaying = false;
+  
+  String _selectedQari = '05';
+  final Map<String, String> _qariNames = {
+    '01': 'Abdullah Al-Juhany',
+    '02': 'Abdul Muhsin',
+    '03': 'Abdurrahman Sudais',
+    '04': 'Ibrahim Al-Dossari',
+    '05': 'Misyari Rasyid',
+    '06': 'Yasser Al-Dosari',
+  };
 
   @override
   void initState() {
@@ -85,20 +95,80 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
         elevation: 0,
         centerTitle: false,
         actions: [
-          if (widget.suratModel.audioUrl.isNotEmpty)
+          if (widget.suratModel.audioFull.isNotEmpty)
             IconButton(
               icon: Icon(
-                _currentlyPlayingUrl == widget.suratModel.audioUrl && _isPlaying 
+                _currentlyPlayingUrl == widget.suratModel.audioFull[_selectedQari] && _isPlaying 
                     ? Icons.pause_circle_filled 
                     : Icons.play_circle_filled,
                 size: 32,
               ),
-              onPressed: () => _playAudio(widget.suratModel.audioUrl),
+              onPressed: () {
+                final audioUrl = widget.suratModel.audioFull[_selectedQari];
+                if (audioUrl != null && audioUrl.isNotEmpty) {
+                  _playAudio(audioUrl);
+                }
+              },
             ),
           const SizedBox(width: 8),
         ],
       ),
-      body: FutureBuilder<List<AyatModel>>(
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.record_voice_over_rounded, color: Colors.teal[600], size: 20),
+                const SizedBox(width: 12),
+                Text(
+                  'Qari:',
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.w600, color: Colors.grey[700]),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.teal[50],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: _selectedQari,
+                        isExpanded: true,
+                        icon: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.teal[700]),
+                        style: GoogleFonts.poppins(color: Colors.teal[800], fontWeight: FontWeight.w500),
+                        items: _qariNames.entries.map((entry) {
+                          return DropdownMenuItem(
+                            value: entry.key,
+                            child: Text(entry.value),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() {
+                              _selectedQari = value;
+                            });
+                            // Stop playing audio if Qari is changed
+                            if (_isPlaying) {
+                              _audioPlayer.stop();
+                            }
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder<List<AyatModel>>(
         future: futureAyat,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -205,16 +275,16 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
                               ),
                             ),
                           ),
-                          if (ayat.audioUrl.isNotEmpty)
+                          if (ayat.audioAyat.containsKey(_selectedQari) && ayat.audioAyat[_selectedQari]!.isNotEmpty)
                             IconButton(
                               icon: Icon(
-                                _currentlyPlayingUrl == ayat.audioUrl && _isPlaying 
+                                _currentlyPlayingUrl == ayat.audioAyat[_selectedQari] && _isPlaying 
                                     ? Icons.pause_circle_filled 
                                     : Icons.play_circle_outline,
                                 color: Colors.teal[600],
                                 size: 28,
                               ),
-                              onPressed: () => _playAudio(ayat.audioUrl),
+                              onPressed: () => _playAudio(ayat.audioAyat[_selectedQari]!),
                             ),
                         ],
                       ),
@@ -265,6 +335,9 @@ class _DetailSuratScreenState extends State<DetailSuratScreen> {
           }
         },
       ),
+    ),
+    ],
+    ),
     );
   }
 }

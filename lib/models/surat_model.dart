@@ -5,7 +5,7 @@ class SuratModel {
   final int jumlahAyat;
   final String tempatTurun;
   final String arti;
-  final String audioUrl;
+  final Map<String, String> audioFull;
 
   SuratModel({
     required this.nomor,
@@ -14,7 +14,7 @@ class SuratModel {
     required this.jumlahAyat,
     required this.tempatTurun,
     required this.arti,
-    required this.audioUrl,
+    required this.audioFull,
   });
 
   factory SuratModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +25,7 @@ class SuratModel {
       jumlahAyat: json['jumlahAyat'] ?? 0,
       tempatTurun: json['tempatTurun'] ?? '',
       arti: json['arti'] ?? '',
-      audioUrl: json['audioFull'] != null ? json['audioFull']['05'] ?? '' : '',
+      audioFull: json['audioFull'] != null ? Map<String, String>.from(json['audioFull']) : {},
     );
   }
 }
