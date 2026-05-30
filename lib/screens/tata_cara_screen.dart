@@ -20,45 +20,77 @@ class TataCaraScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.teal[700],
         foregroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         itemCount: tataCaraList.length,
         itemBuilder: (context, index) {
           final item = tataCaraList[index];
-          return Card(
-            elevation: 2,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.teal.withOpacity(0.08),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
-              leading: CircleAvatar(
-                backgroundColor: Colors.teal[100],
-                foregroundColor: Colors.teal[900],
-                child: Text(
-                  item.id,
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                ),
-              ),
-              title: Text(
-                item.name,
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.teal),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailGerakanScreen(sholatModel: item),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(20),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailGerakanScreen(sholatModel: item),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: Colors.teal[50],
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          item.id,
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal[800],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          item.name,
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                      ),
+                      Icon(Icons.arrow_forward_ios_rounded, size: 18, color: Colors.teal[300]),
+                    ],
                   ),
-                );
-              },
+                ),
+              ),
             ),
           );
         },

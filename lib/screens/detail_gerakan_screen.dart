@@ -10,26 +10,36 @@ class DetailGerakanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text(
           sholatModel.name,
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 18),
         ),
         backgroundColor: Colors.teal[700],
         foregroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Teks Arab
+            // Container Teks Arab
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
               decoration: BoxDecoration(
-                color: Colors.teal[50],
-                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.teal.withOpacity(0.08),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+                border: Border.all(color: Colors.teal.withOpacity(0.1)),
               ),
               child: Text(
                 sholatModel.arabic,
@@ -39,17 +49,22 @@ class DetailGerakanScreen extends StatelessWidget {
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.teal[900],
-                  height: 2.0,
+                  height: 2.2,
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 32),
             
-            // Label Latin
+            // Teks Latin
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.menu_book, size: 20, color: Colors.teal[700]),
-                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(color: Colors.teal[50], shape: BoxShape.circle),
+                  child: Icon(Icons.spellcheck_rounded, size: 20, color: Colors.teal[700]),
+                ),
+                const SizedBox(width: 12),
                 Text(
                   'Bacaan Latin',
                   style: GoogleFonts.poppins(
@@ -60,28 +75,37 @@ class DetailGerakanScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            // Teks Latin
-            Text(
-              sholatModel.latin,
-              style: GoogleFonts.poppins(
-                fontSize: 15,
-                color: Colors.grey[800],
-                fontStyle: FontStyle.italic,
-                height: 1.5,
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.grey[200]!),
+              ),
+              child: Text(
+                sholatModel.latin,
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color: Colors.teal[700],
+                  fontStyle: FontStyle.italic,
+                  height: 1.6,
+                ),
               ),
             ),
             
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Divider(),
-            ),
+            const SizedBox(height: 24),
 
-            // Label Arti
+            // Terjemahan
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.translate, size: 20, color: Colors.amber[700]),
-                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(color: Colors.amber[50], shape: BoxShape.circle),
+                  child: Icon(Icons.translate_rounded, size: 20, color: Colors.amber[700]),
+                ),
+                const SizedBox(width: 12),
                 Text(
                   'Terjemahan',
                   style: GoogleFonts.poppins(
@@ -92,14 +116,21 @@ class DetailGerakanScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            // Teks Arti
-            Text(
-              sholatModel.translation,
-              style: GoogleFonts.poppins(
-                fontSize: 15,
-                color: Colors.grey[800],
-                height: 1.5,
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.grey[200]!),
+              ),
+              child: Text(
+                sholatModel.translation,
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color: Colors.grey[800],
+                  height: 1.6,
+                ),
               ),
             ),
           ],

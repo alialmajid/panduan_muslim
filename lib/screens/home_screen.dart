@@ -9,77 +9,169 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        title: Text(
-          'Panduan Muslim',
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+      body: Stack(
+        children: [
+          // Background Image bernuansa Islami
+          Positioned.fill(
+            child: Image.network(
+              'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&q=80&w=1000',
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        backgroundColor: Colors.teal[700],
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Assalamu\'alaikum,',
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                color: Colors.grey[600],
+          // Overlay Gradient Gelap agar teks mudah dibaca
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.teal[900]!.withOpacity(0.9),
+                    Colors.teal[800]!.withOpacity(0.6),
+                    Colors.black87,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Mari tingkatkan\nibadah kita hari ini',
-              style: GoogleFonts.poppins(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.teal[900],
-                height: 1.3,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
+          ),
+          // Konten Utama
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildMenuCard(
-                    context,
-                    title: 'Tata Cara\nSholat',
-                    icon: Icons.mosque_rounded,
-                    color: Colors.teal,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const TataCaraScreen()),
-                      );
-                    },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Assalamu\'alaikum,',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              color: Colors.teal[100],
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Hamba Allah',
+                            style: GoogleFonts.poppins(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      CircleAvatar(
+                        radius: 26,
+                        backgroundColor: Colors.white.withOpacity(0.2),
+                        child: const Icon(Icons.person, color: Colors.white, size: 30),
+                      )
+                    ],
                   ),
-                  _buildMenuCard(
-                    context,
-                    title: 'Bacaan\nAl-Quran',
-                    icon: Icons.menu_book_rounded,
-                    color: Colors.amber[700]!,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ListSuratScreen()),
-                      );
-                    },
+                  const SizedBox(height: 35),
+                  // Kartu Info (Hadits/Quote)
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.teal[400]!.withOpacity(0.9), Colors.teal[700]!.withOpacity(0.9)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(Icons.menu_book, color: Colors.white, size: 20),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Hadits Hari Ini',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          '"Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju surga."\n(HR. Muslim)',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 13,
+                            height: 1.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 35),
+                  Text(
+                    'Menu Utama',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      children: [
+                        _buildMenuCard(
+                          context,
+                          title: 'Tata Cara\nSholat',
+                          icon: Icons.mosque_rounded,
+                          color: Colors.teal[50]!,
+                          iconColor: Colors.teal[800]!,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const TataCaraScreen()),
+                            );
+                          },
+                        ),
+                        _buildMenuCard(
+                          context,
+                          title: 'Al-Quran\nDigital',
+                          icon: Icons.menu_book_rounded,
+                          color: Colors.amber[50]!,
+                          iconColor: Colors.amber[800]!,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ListSuratScreen()),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -88,21 +180,21 @@ class HomeScreen extends StatelessWidget {
     required String title,
     required IconData icon,
     required Color color,
+    required Color iconColor,
     required VoidCallback onTap,
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(24),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          color: Colors.white.withOpacity(0.95),
+          borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 8,
-              offset: const Offset(0, 4),
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
             ),
           ],
         ),
@@ -110,15 +202,15 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 icon,
-                size: 40,
-                color: color,
+                size: 38,
+                color: iconColor,
               ),
             ),
             const SizedBox(height: 16),
@@ -126,9 +218,9 @@ class HomeScreen extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[800],
+                color: Colors.teal[900],
               ),
             ),
           ],
