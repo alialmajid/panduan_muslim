@@ -15,6 +15,17 @@ dependencies:
   google_fonts: ^6.2.1
   audioplayers: ^6.6.0
   shared_preferences: ^2.5.5
+  lucide_icons: ^0.257.0
+  flutter_svg: ^2.3.0
+  flutter_animate: ^4.5.2
+  iconsax: ^0.0.8
+  remixicon: ^4.9.3
+  font_awesome_flutter: ^11.0.0
+  flutter_qiblah: ^3.2.0
+  geolocator: ^14.0.3
+  adhan: ^2.0.0+1
+  geocoding: ^4.0.0
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +38,9 @@ flutter:
   assets:
     - assets/images/bg.jpg
     - assets/logo.png
+    - assets/icons/
+    - assets/data/
+    - assets/data/surat/
 
 flutter_launcher_icons:
   android: "launcher_icon"

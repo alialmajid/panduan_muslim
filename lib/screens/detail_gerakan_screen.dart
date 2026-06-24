@@ -14,7 +14,7 @@ class DetailGerakanScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           sholatModel.name,
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 18),
+          style: GoogleFonts.elMessiri(fontWeight: FontWeight.w600, fontSize: 18),
         ),
         backgroundColor: Colors.teal[700],
         foregroundColor: Colors.white,
@@ -67,7 +67,7 @@ class DetailGerakanScreen extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   'Bacaan Latin',
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.elMessiri(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.teal[800],
@@ -85,7 +85,7 @@ class DetailGerakanScreen extends StatelessWidget {
               ),
               child: Text(
                 sholatModel.latin,
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.elMessiri(
                   fontSize: 15,
                   color: Colors.teal[700],
                   fontStyle: FontStyle.italic,
@@ -108,7 +108,7 @@ class DetailGerakanScreen extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   'Terjemahan',
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.elMessiri(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.teal[800],
@@ -126,7 +126,7 @@ class DetailGerakanScreen extends StatelessWidget {
               ),
               child: Text(
                 sholatModel.translation,
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.elMessiri(
                   fontSize: 15,
                   color: Colors.grey[800],
                   height: 1.6,

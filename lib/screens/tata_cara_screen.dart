@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:remixicon/remixicon.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../data/sholat_data.dart';
 import '../models/sholat_model.dart';
+import '../theme/colors.dart';
 import 'list_gerakan_screen.dart';
 
 class TataCaraScreen extends StatelessWidget {
@@ -12,27 +15,34 @@ class TataCaraScreen extends StatelessWidget {
     final List<JenisSholatModel> semuaSholat = SholatData.getJenisSholat();
     final List<JenisSholatModel> sholatWajib = semuaSholat.where((s) => s.isWajib).toList();
     final List<JenisSholatModel> sholatSunnah = semuaSholat.where((s) => !s.isWajib).toList();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.grey[50],
+        backgroundColor: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
         appBar: AppBar(
           title: Text(
-            'Pilihan Sholat',
-            style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.teal[900]),
+            'Panduan Sholat',
+            style: GoogleFonts.elMessiri(
+              fontWeight: FontWeight.bold, 
+              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            ),
           ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.teal[900],
+          backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Remix.arrow_left_s_line, color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
+            onPressed: () => Navigator.pop(context),
+          ),
           bottom: TabBar(
-            indicatorColor: Colors.teal[700],
+            indicatorColor: AppColors.primary,
             indicatorWeight: 3,
-            labelColor: Colors.teal[800],
-            unselectedLabelColor: Colors.grey[500],
-            labelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-            unselectedLabelStyle: GoogleFonts.poppins(fontWeight: FontWeight.normal),
+            labelColor: AppColors.primary,
+            unselectedLabelColor: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+            labelStyle: GoogleFonts.elMessiri(fontWeight: FontWeight.bold),
+            unselectedLabelStyle: GoogleFonts.elMessiri(fontWeight: FontWeight.w500),
             tabs: const [
               Tab(text: 'Sholat Wajib'),
               Tab(text: 'Sholat Sunnah'),
@@ -41,31 +51,37 @@ class TataCaraScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildList(sholatWajib),
-            _buildList(sholatSunnah),
+            _buildList(sholatWajib, isDark),
+            _buildList(sholatSunnah, isDark),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildList(List<JenisSholatModel> list) {
+  Widget _buildList(List<JenisSholatModel> list, bool isDark) {
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      padding: const EdgeInsets.all(24),
       itemCount: list.length,
       itemBuilder: (context, index) {
         final item = list[index];
         return Container(
           margin: const EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey[200]!, width: 1.5),
+            color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: isDark ? Colors.black.withOpacity(0.2) : AppColors.primary.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(20),
               onTap: () {
                 Navigator.push(
                   context,
@@ -79,12 +95,12 @@ class TataCaraScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.teal.withOpacity(0.1),
-                        shape: BoxShape.circle,
+                        color: AppColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Icon(Icons.mosque_rounded, color: Colors.teal[700], size: 24),
+                      child: const Icon(Remix.user_star_line, color: AppColors.primary, size: 28),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -93,30 +109,30 @@ class TataCaraScreen extends StatelessWidget {
                         children: [
                           Text(
                             item.nama,
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.elMessiri(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey[800],
+                              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Tata cara & niat lengkap',
-                            style: GoogleFonts.poppins(
+                            'Panduan & niat lengkap',
+                            style: GoogleFonts.elMessiri(
                               fontSize: 12,
-                              color: Colors.grey[500],
+                              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios_rounded, size: 18, color: Colors.grey[400]),
+                    Icon(Remix.arrow_right_s_line, size: 20, color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
                   ],
                 ),
               ),
             ),
           ),
-        );
+        ).animate().fade(delay: (50 * index).ms).slideX(begin: 0.1, end: 0);
       },
     );
   }
