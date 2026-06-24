@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:hijri/hijri_calendar.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/surat_model.dart';
@@ -132,13 +133,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       const Icon(Remix.sun_cloudy_line, color: Colors.white, size: 20),
                       const SizedBox(width: 8),
-                      Text(
-                        '12 Rabiul Awal 1448 H', // Mockup date
-                        style: GoogleFonts.elMessiri(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      Builder(
+                        builder: (context) {
+                          final today = HijriCalendar.now();
+                          const hijriMonths = [
+                            'Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 
+                            'Jumadil Awal', 'Jumadil Akhir', 'Rajab', 'Sya\'ban', 
+                            'Ramadhan', 'Syawal', 'Dzulqa\'dah', 'Dzulhijjah'
+                          ];
+                          final monthName = hijriMonths[today.hMonth - 1];
+                          final hijriString = '${today.hDay} $monthName ${today.hYear} H';
+                          
+                          return Text(
+                            hijriString,
+                            style: GoogleFonts.elMessiri(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
+                        }
                       ),
                     ],
                   ).animate().fade(delay: 200.ms).slideX(),
